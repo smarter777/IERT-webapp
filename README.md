@@ -154,3 +154,11 @@ class Solution:
 
 ```
 
+爬楼梯动态规划
+
+# https://leetcode-cn.com/problems/climbing-stairs/solution/70zhong-quan-chu-ji-python3hui-ji-liao-ti-jie-qu-w/
+
+## 动态规划三种解法+多图 三角形最小路径
+
+https://leetcode-cn.com/problems/triangle/solution/san-chong-jie-fa-duo-tu-xiang-jie-120-san-jiao-xin/
+

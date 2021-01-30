@@ -1,8 +1,19 @@
 class Solution:
+    _dp = [0]
+
+    def numSquares(self, n: int) -> int:
+        dp = self._dp
+        while len(dp) <= n:
+            dp += min(dp[-i * i] for i in range(1, int(len(dp) ** 0.5 + 1))) + 1,
+        return dp[n]
+
+
+class Solution:
     """
     方法三：贪心枚举
     https://leetcode-cn.com/problems/perfect-squares/solution/wan-quan-ping-fang-shu-by-leetcode/
     """
+
     def numSquares(self, n):
 
         def is_divided_by(n, count):
@@ -24,4 +35,3 @@ class Solution:
         for count in range(1, n + 1):
             if is_divided_by(n, count):
                 return count
-
