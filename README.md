@@ -162,3 +162,10 @@ class Solution:
 
 https://leetcode-cn.com/problems/triangle/solution/san-chong-jie-fa-duo-tu-xiang-jie-120-san-jiao-xin/
 
+## 剩余题目
+
+198	213 337 309
+
+416	322 377 474 139 494
+
+300	376
