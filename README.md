@@ -164,8 +164,15 @@ https://leetcode-cn.com/problems/triangle/solution/san-chong-jie-fa-duo-tu-xiang
 
 ## 剩余题目
 
-198	213 337 309
+## 动态规划 LeetCode 股票相关题目
 
-416	322 377 474 139 494
+https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/solution/zui-jia-mai-mai-gu-piao-shi-ji-han-leng-dong-qi-4/
 
-300	376
+## 背包九讲
+
+https://github.com/tianyicui/pack
+
+## labuladong 的算法笔记
+
+https://labuladong.gitee.io/algo/
+
