@@ -1,4 +1,144 @@
 class Solution:
+    """
+    只寻找第一个
+    """
+    def __init__(self):
+        self.res = []
+
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        # 输入棋盘边长 n，返回所有合法的放置
+        # '.' 表示空，'Q' 表示皇后，初始化空棋盘。
+        board = [['.'] * n for i in range(n)]
+        # board = [['.']*n] *n
+        self.backtrack(board, 0)
+        return self.res
+
+    # 路径：board 中小于 row 的那些行都已经成功放置了皇后
+    # 选择列表：第 row 行的所有列都是放置皇后的选择
+    # 结束条件：row 超过 board 的最后一行
+    def backtrack(self, board, row):
+        # 触发结束条件
+        if row == len(board):
+            # print("board", board)
+            self.res.append([''.join(val) for val in board])
+            return True  # Modify-1
+
+        n = len(board[row])  # 有多少列
+        for col in range(n):
+            # 排除不合法的选择
+            if not self.is_valid(board, row, col):
+                continue
+            # 做选择
+            board[row][col] = 'Q'
+            # 进入下一行决策
+            if self.backtrack(board, row + 1):
+                return True
+            # 撤销选择
+            board[row][col] = '.'
+        return False
+
+    def is_valid(self, board, row, col):
+        n = len(board)
+
+        # 检查列是否有皇后互相冲突
+        for i in range(n):
+            if board[i][col] == 'Q':
+                return False
+
+        # 检查右上方是否有冲突
+        i = row - 1
+        j = col + 1
+        while i >= 0 and j < n:
+            if board[i][j] == 'Q':
+                return False
+            i -= 1
+            j += 1
+
+        # 检查左上方是否有冲突
+        i = row - 1
+        j = col - 1
+        while i >= 0 and j >= 0:
+            if board[i][j] == 'Q':
+                return False
+            i -= 1
+            j -= 1
+
+        return True
+"""
+https://blog.csdn.net/z1314520cz/article/details/85162183
+
+>>> board = [['.']*n] *n
+>>> board[0][0] = 'Q'
+>>> board
+[['Q', '.', '.', '.'], ['Q', '.', '.', '.'], ['Q', '.', '.', '.'], ['Q', '.', '.', '.']]
+>>> board2 = [list('.'*n)] *n
+>>> board[0][0] = 'Q'
+>>> board2
+[['.', '.', '.', '.'], ['.', '.', '.', '.'], ['.', '.', '.', '.'], ['.', '.', '.', '.']]
+>>> board = [['.'] * n for i in range(n)]
+>>> board[0][0] = 'Q'
+>>> board
+[['Q', '.', '.', '.'], ['.', '.', '.', '.'], ['.', '.', '.', '.'], ['.', '.', '.', '.']]
+"""
+class Solution:
+    def is_valid(self, board, row, col):
+        n = len(board[0])
+        # 检查列冲突
+        for i in range(n):
+            if board[i][col] == 'Q': return False
+
+        # 检查左斜上方冲突
+        i, j = row - 1, col - 1
+        while i >= 0 and j >= 0:
+            if board[i][j] == 'Q': return False
+            i -= 1
+            j -= 1
+
+        # 检查右斜上方冲突
+        i, j = row - 1, col + 1
+        while i >= 0 and j < n:
+            if board[i][j] == 'Q': return False
+            i -= 1
+            j += 1
+
+        return True
+
+    def __init__(self):
+        self.res = []
+
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        # 输入棋盘边长 n，返回所有合法的放置
+        # '.' 表示空，'Q' 表示皇后，初始化空棋盘。
+        # board = [list('.'*n)] *n
+        board = [['.'] * n for i in range(n)]
+        self.backtrack(board, 0)
+        return self.res
+
+    # 路径：board 中小于 row 的那些行都已经成功放置了皇后
+    # 选择列表：第 row 行的所有列都是放置皇后的选择
+    # 结束条件：row 超过 board 的最后一行
+    def backtrack(self, board, row):
+        # 触发结束条件
+        if row == len(board):
+            print("board", board)
+            # self.res.append(board)
+            self.res.append([''.join(val) for val in board])
+            return
+
+        n = len(board[row])  # 有多少列
+        for col in range(n):
+            # 排除不合法的选择
+            if not self.is_valid(board, row, col):
+                continue
+            # 做选择
+            board[row][col] = 'Q'
+            # 进入下一行决策
+            self.backtrack(board, row + 1)
+            # 撤销选择
+            board[row][col] = '.'
+
+
+class Solution:
     def totalNQueens(self, n: int) -> int:
         ret = [0, 1, 0, 0, 2, 10, 4, 40, 92, 352, 724, 2680][n]
         return ret
