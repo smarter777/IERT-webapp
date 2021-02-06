@@ -14,6 +14,9 @@ class Solution:
         return root
 
 class Solution:
+    """
+    非递归实现
+    """
     def invertTree(self, root: TreeNode) -> TreeNode:
         if not root:
             return root

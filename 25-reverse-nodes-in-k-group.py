@@ -1,5 +1,67 @@
 # Definition for singly-linked list.
 # class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    """
+    https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/kge-yi-zu-fan-zhuan-lian-biao-by-powcai/
+    """
+
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = ListNode(0)
+        p = dummy
+        while True:
+            count = k
+            stack = []
+            tmp = head
+            while count and tmp:
+                stack.append(tmp)
+                tmp = tmp.next
+                count -= 1
+            # 注意,目前tmp所在k+1位置
+            # 说明剩下的链表不够k个,跳出循环
+            if count:
+                p.next = head
+                break
+            # 翻转操作
+            while stack:
+                p.next = stack.pop()
+                p = p.next
+            # 与剩下链表连接起来
+            p.next = tmp
+            head = tmp
+
+        return dummy.next
+
+
+class Solution:
+    def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
+        dummy = ListNode(0)
+        dummy.next = head
+        pre = dummy
+        tail = dummy
+        while True:
+            count = k
+            while count and tail:
+                count -= 1
+                tail = tail.next
+            if not tail: break
+            head = pre.next
+            while pre.next != tail:
+                cur = pre.next  # 获取下一个元素
+                # pre与cur.next连接起来,此时cur(孤单)掉了出来
+                pre.next = cur.next
+                cur.next = tail.next  # 和剩余的链表连接起来
+                tail.next = cur  # 插在tail后面
+            # 改变 pre tail 的值
+            pre = head
+            tail = head
+        return dummy.next
+
+# Definition for singly-linked list.
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
