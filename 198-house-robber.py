@@ -1,4 +1,42 @@
 class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
+        size = len(nums)
+        if size == 1:
+            return nums[0]
+
+        first, second = nums[0], max(nums[0], nums[1])
+        for i in range(2, size):
+            first, second = second, max(first + nums[i], second)
+
+        return second
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
+        size = len(nums)
+        if size == 1:
+            return nums[0]
+
+        dp = [0] * size
+        # base
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+
+        # 第i(i>2)天，只能dp[i-2]
+        for i in range(2, size):
+            # 偷或不偷
+            # 1. 偷 k 就不能偷k-1,偷窃总金额为前 k−2 间房屋的最高总金额与第 k 间房屋的金额之和。
+            # 2. 不偷窃第 k 间房屋，偷窃总金额为前 k−1 间房屋的最高总金额
+            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])
+
+        return dp[size - 1]
+
+class Solution:
     def rob(self, nums):
         prev, cur = 0, 0
         # prev: dp[k-2]

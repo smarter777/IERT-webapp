@@ -1,3 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    """
+    返回一个大小为 2 的数组 arr
+    arr[0] 表示不抢 root 的话，得到的最大钱数
+    arr[1] 表示抢 root 的话，得到的最大钱数
+    """
+
+    def rob(self, root: TreeNode) -> int:
+        def _rob(root):
+            if not root: return 0, 0
+
+            ls, ln = _rob(root.left)
+            rs, rn = _rob(root.right)
+
+            # 抢,下家就不能抢了
+            rob = root.val + ln + rn
+            # 不抢，下家可抢可不抢，取决于收益大小
+            not_rob = max(ls, ln) + max(rs, rn)
+            return rob, not_rob
+
+        return max(_rob(root))
+
 class Solution:
 
     def rob(self, root: TreeNode) -> int:
