@@ -12,7 +12,8 @@ class Solution:
 
         if not root:
             return True
-        return abs(height(root.left) - height(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+        return abs(height(root.left) - height(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(
+            root.right)
 
 
 class Solution:
@@ -21,6 +22,7 @@ class Solution:
         https://leetcode-cn.com/problems/balanced-binary-tree/solution/ping-heng-er-cha-shu-by-leetcode-solution/
         自底向上的递归
         """
+
         def height(root: TreeNode) -> int:
             if not root:
                 return 0
@@ -37,17 +39,20 @@ class Solution:
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
         self.res = True
+
         def helper(root):
             if not root:
                 return 0
             left = helper(root.left)
             right = helper(root.right)
-            #print(right, left)
+            # print(right, left)
             if abs(right - left) > 1:
                 self.res = False
             return max(left, right) + 1
+
         helper(root)
         return self.res
+
 
 class Solution:
     def isBalanced(self, root: TreeNode) -> bool:
@@ -59,3 +64,23 @@ class Solution:
 单步操作应该怎么写？因为递归就是大量的调用自身的重复操作，因此从宏观上考虑，只用想想单步怎么写就行了，左树和右树应该看成一个整体，即此时树一共三个节点：root，root.left，root.right。
 https://leetcode-cn.com/problems/balanced-binary-tree/comments/
         """
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        def depth(node):
+            if not node:
+                return 0
+            return max(depth(node.left), depth(node.right)) + 1
+
+        if not root:
+            return True
+        else:
+            return abs(depth(root.left) - depth(root.right)) <= 1 and self.isBalanced(root.left) and self.isBalanced(
+                root.right)

@@ -28,6 +28,7 @@ class Solution:
             depth += 1
         return depth
 
+
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
         if not root:
@@ -42,6 +43,7 @@ class Solution:
         rightdeep = self.minDepth(root.right)
         return min(leftdeep, rightdeep) + 1
 
+
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
         if not root: return 0
@@ -51,8 +53,25 @@ class Solution:
             cur, depth = queue.popleft()
             if depth >= res:
                 continue
-            if cur.left: queue.append((cur.left, depth+1))
-            if cur.right: queue.append((cur.right, depth+1))
+            if cur.left: queue.append((cur.left, depth + 1))
+            if cur.right: queue.append((cur.right, depth + 1))
             if not cur.left and not cur.right:
                 res = depth
         return res
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        elif not root.left and root.right:
+            return 1 + self.minDepth(root.right)
+        elif not root.right and root.left:
+            return 1 + self.minDepth(root.left)
+        return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
