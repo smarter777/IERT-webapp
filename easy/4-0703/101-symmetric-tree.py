@@ -78,3 +78,18 @@ def symmetric(left: TreeNode, right: TreeNode):
         return False
     return   symmetric(left.left, right.right) and symmetric(left.right, right.left)
 
+
+
+class Solution:
+    def symmetric(self, left: TreeNode, right: TreeNode):
+        if not left and not right: return True
+        if (not left and right) or (not right and left) or left.val != right.val:
+            return False
+        return  self.symmetric(left.left, right.right) and self.symmetric(left.right, right.left)
+
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
+        else:
+            return self.symmetric(root.left, root.right)
+

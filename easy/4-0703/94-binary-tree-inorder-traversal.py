@@ -30,3 +30,18 @@ class Solution:
                 cur = cur.right
         return ret
 
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        # 中序遍历 先遍历左子树->根节点->右子树
+        def inorder(root):
+            if not root:
+                return
+            inorder(root.left)
+            res.append(root.val)
+            inorder(root.right)
+
+        res = []
+        inorder(root)
+        return res
+
