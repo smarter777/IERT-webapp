@@ -7,3 +7,14 @@ class Solution:
             return numOnes
         else:
             return numOnes - (k - numOnes - numZeros)
+
+
+class Solution:
+    def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:
+        if numOnes >= k:
+            return k
+        elif numOnes < k < numOnes + numZeros:
+            return numOnes
+        else:
+            # 拿走所有的0和1，剩下的-1数量减去
+            return numOnes - (k - numOnes - numZeros)

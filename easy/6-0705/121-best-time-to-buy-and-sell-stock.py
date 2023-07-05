@@ -12,11 +12,12 @@ class Solution:
         dp[i][1] = Math.max(dp[i-1][1], -prices[i]);
         """
         dp_i_0 = 0
-        dp_i_1 = float('-inf') #  base case: dp[-1][0] = 0, dp[-1][1] = -infinity
+        dp_i_1 = float('-inf')  # base case: dp[-1][0] = 0, dp[-1][1] = -infinity
         for i in range(n):
-            dp_i_0 = max(dp_i_0, dp_i_1+prices[i])
+            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i])
             dp_i_1 = max(dp_i_1, -prices[i])
         return dp_i_0
+
 
 class Solution:
     def maxProfit(self, prices):
@@ -33,4 +34,37 @@ class Solution:
             min_p = min(min_p, prices[i])
             max_p = max(max_p, prices[i] - min_p)
         return max_p
+
+
+# 此方法会超时
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        ans = 0
+        for i in range(len(prices)):
+            for j in range(i + 1, len(prices)):
+                ans = max(ans, prices[j] - prices[i])
+        return ans
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        i = 0
+        max_profit = 0
+        for j in range(i + 1, len(prices)):
+            if prices[i] < prices[j]:
+                if prices[j] - prices[i] > max_profit:
+                    max_profit = prices[j] - prices[i]
+
+            elif prices[j] < prices[i]:
+                i = j
+        return max_profit
+
+
+class Solution:
+    def maxProfit(self, prices):
+        min_p,max_ret = float('inf'), 0
+        for one in prices:
+            min_p = min(min_p, one)
+            max_ret = max(max_ret, one-min_p)
+        return max_ret
 
