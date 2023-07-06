@@ -4,6 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# 前序遍历顺序为：根 -> 左 -> 右
+#
+# 后序遍历顺序为：左 -> 右 -> 根
+# 中序(左根右)
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
         if not root:
